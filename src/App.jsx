@@ -1,12 +1,13 @@
 import './App.css'
-import { useSelector, useDispatch } from 'react-redux'
+import { PostsList } from './features/Posts/PostsLists'
+import { AddPostForm } from './features/Posts/AddPostsForm'
 
 
 function App() {
-  const dispatch = useDispatch()
   return (
     <div className="App">
-      <h1>Vite + Redux</h1>
+      <AddPostForm />
+      <PostsList />
     </div>
   )
 }
