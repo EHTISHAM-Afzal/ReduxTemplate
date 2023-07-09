@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
-import AllUsers from "../features/CounterSlice"
+import AllUsers from "../features/Slice"
 
 export const Store = configureStore ({
     reducer : {

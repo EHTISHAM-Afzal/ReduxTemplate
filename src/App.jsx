@@ -6,6 +6,7 @@ function App() {
   const dispatch = useDispatch()
   return (
     <div className="App">
+      <h1>Vite + Redux</h1>
     </div>
   )
 }
