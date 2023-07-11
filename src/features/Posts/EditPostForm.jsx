@@ -1,47 +1,58 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { addPost } from './PostsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import {   useParams ,} from 'react-router-dom'
 
-export const AddPostForm = () => {
+import { postUpdated } from './PostsSlice'
+
+const EditPostForm = () => {
+  const param = useParams()
+  const postId = param.postId
+
+
+  const post = useSelector(state =>
+    state.posts.find(post => post.id === postId)
+  )
+
+  const [title, setTitle] = useState(post.title)
+  const [content, setContent] = useState(post.content)
+
   const dispatch = useDispatch()
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
 
   const onTitleChanged = e => setTitle(e.target.value)
   const onContentChanged = e => setContent(e.target.value)
 
   const onSavePostClicked = () => {
     if (title && content) {
-      dispatch(addPost(title,content,))
-      setTitle('')
-      setContent('')
+      dispatch(postUpdated({ id: postId, title, content }));
     }
   }
 
-
   return (
     <section>
-      <h2>Add a New Post</h2>
+      <h2>Edit Post</h2>
       <form>
         <label htmlFor="postTitle">Post Title:</label>
         <input
-          className='text-center '
           type="text"
           id="postTitle"
           name="postTitle"
+          placeholder="What's on your mind?"
           value={title}
           onChange={onTitleChanged}
         />
         <label htmlFor="postContent">Content:</label>
         <textarea
-          className='text-center'
           id="postContent"
           name="postContent"
           value={content}
           onChange={onContentChanged}
         />
-        <button type="button" onClick={onSavePostClicked}>Save Post</button>
       </form>
+      <button type="button" onClick={onSavePostClicked}>
+        Save Post
+      </button>
     </section>
   )
 }
+
+export default EditPostForm
