@@ -1,4 +1,4 @@
-import { PostsList } from './features/Posts/PostsLists'
+import { PostsList } from './features/Posts/PostsList'
 import { AddPostForm } from './features/Posts/AddPostsForm'
 import { BrowserRouter as Router , Routes , Route } from 'react-router-dom'
 import NavBar from './Components/NavBar'

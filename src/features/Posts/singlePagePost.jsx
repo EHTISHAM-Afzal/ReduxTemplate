@@ -3,13 +3,15 @@ import { useSelector , } from 'react-redux'
 import { useLocation , Link } from 'react-router-dom'
 import { PostAuthor } from './PostAuthor'
 import { ReactionButtons } from './ReactionButton'
+import { TimeAgo } from './TimeAgo'
+import { selectPostById } from './PostsSlice'
 
 export const SinglePostPage = () => {
     const location = useLocation()
+    const postId = location.pathname.split("/")[1]
 
-  const post = useSelector(state =>
-    state.posts.filter(post => `/${post.id}` === location.pathname)[0]
-  )
+    const post = useSelector(state => selectPostById(state, postId))
+
 
 
   if (!post) {
@@ -25,7 +27,7 @@ export const SinglePostPage = () => {
     <section>
       <article className="post">
         <h2>{post.title}</h2>
-        <PostAuthor userId={post.user}/>
+        <div><PostAuthor userId={post.user}/> <TimeAgo timestamp={post.date}/></div>
         <p className="post-content">{post.content}</p>
         <ReactionButtons post={post}/>
         <Link to={`/editPost/${post.id}`} className="button">
