@@ -1,34 +1,33 @@
 import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
-import { client } from "../../Api/client";
 import { sub } from "date-fns";
-
-export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  const response = await client.get("/fakeApi/posts");
-  return response.data;
-});
 
 const initialState = {
   posts: [
-    {
-      id: "1",
-      title: "First Post!",
-      content: "Hello!",
-      user: "0",
-      date: sub(new Date(), { minutes: 10 }).toISOString(),
-      reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 },
-    },
-    {
-      id: "2",
-      title: "Second Post",
-      content: "More text",
-      user: "1",
-      date: sub(new Date(), { minutes: 5 }).toISOString(),
-      reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 },
-    },
+    // {
+      //   id: "1",
+      //   title: "First Post!",
+      //   content: "Hello!",
+    //   user: "0",
+    //   date: sub(new Date(), { minutes: 10 }).toISOString(),
+    //   reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 },
+    // },
+    // {
+    //   id: "2",
+    //   title: "Second Post",
+    //   content: "More text",
+    //   user: "1",
+    //   date: sub(new Date(), { minutes: 5 }).toISOString(),
+    //   reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 },
+    // },
   ],
   status: "idle",
   error: null,
 };
+
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await axios.get('/fakeApi/posts')
+  return response.data
+})
 
 const postsSlice = createSlice({
   name: "posts",
