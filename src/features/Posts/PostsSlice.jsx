@@ -1,5 +1,7 @@
 import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
+import { client } from "../../Api/client";
 import { sub } from "date-fns";
+import axios from "axios";
 
 const initialState = {
   posts: [
@@ -25,7 +27,7 @@ const initialState = {
 };
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await axios.get('/fakeApi/posts')
+  const response = await client.get('/fakeApi/posts');
   return response.data
 })
 
@@ -65,6 +67,7 @@ const postsSlice = createSlice({
         existingPost.content = content;
       }
     },
+  },
     extraReducers(builder) {
       builder
         .addCase(fetchPosts.pending, (state, action) => {
@@ -80,10 +83,10 @@ const postsSlice = createSlice({
           state.error = action.error.message
         })
     }
-  },
+  
 });
 
-export const { addPost, postUpdated, reactionAdded } = postsSlice.actions;
+export const { addPost, postUpdated, reactionAdded  } = postsSlice.actions;
 
 export default postsSlice.reducer;
 

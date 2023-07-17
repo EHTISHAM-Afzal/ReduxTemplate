@@ -4,8 +4,11 @@ import { TimeAgo } from "./TimeAgo";
 import { ReactionButtons } from "./ReactionButton";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectAllPosts, fetchPosts } from "./PostsSlice";
+import { selectAllPosts, fetchPosts ,  } from "./PostsSlice";
 import { Spinner } from "../../Components/spinner";
+import { response } from "msw";
+
+
 
 const PostExcerpt = ({ post }) => {
   return (
@@ -28,8 +31,8 @@ const PostExcerpt = ({ post }) => {
 export const PostsList = () => {
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
-const postStatus = useSelector((state) => state.posts.status);
-
+const postStatus = useSelector((state) => state.posts.status)
+const error = useSelector((state) => state.posts.error);
   useEffect(() => {
     if (postStatus === "idle") {
       dispatch(fetchPosts());
