@@ -4,9 +4,8 @@ import { nanoid } from '@reduxjs/toolkit'
 import seedrandom from 'seedrandom'
 import { Server as MockSocketServer } from 'mock-socket'
 import { setRandom } from 'txtgen'
-
-import { parseISO } from 'date-fns'
 import faker from 'faker'
+import { parseISO } from 'date-fns'
 
 const NUM_USERS = 3
 const POSTS_PER_USER = 3
